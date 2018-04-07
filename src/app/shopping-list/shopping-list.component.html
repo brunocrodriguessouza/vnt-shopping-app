@@ -8,7 +8,7 @@
 </form>
 <ul class="list-group">
   <app-shopping-list-item 
-    *ngFor="let item of listItems"
+    *ngFor="let item of listItems | async"
     [item]="item">
   </app-shopping-list-item>
 </ul>
