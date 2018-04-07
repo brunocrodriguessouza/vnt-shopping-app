@@ -8,7 +8,7 @@ import { ShoppingListService } from '../shopping-list.service';
 })
 export class ShoppingListComponent implements OnInit {
 
-  private listItems: Object;
+  private listItems: Array<any>;
 
   private itemToAdd: string = '';
 
@@ -39,7 +39,13 @@ export class ShoppingListComponent implements OnInit {
       disabled: false
     };
     //Adicionar
-    this.myShoppingListService.add(newItem);
+    this.myShoppingListService.add(newItem).subscribe(
+      response => { 
+        newItem['key'] = response['name'];
+        this.listItems.unshift(newItem)},
+
+      error => { console.log('Deu certo!')} 
+    );  
     this.itemToAdd = '';
   }
 

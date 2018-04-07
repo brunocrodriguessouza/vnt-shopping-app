@@ -28,23 +28,20 @@ export class ShoppingListService {
     return this.httpClient.get(`${environment.firebase.databaseURL}/items.json`);
   }
 
-  public add(item){
-    this.httpClient.post(`${environment.firebase.databaseURL}/items.json`, item).subscribe(
-      response => { console.log('Deu certo!')},
-      error => { console.log('Deu certo!')} 
-    );  
+  public add(item): Observable<Object>{
+    return this.httpClient.post(`${environment.firebase.databaseURL}/items.json`, item);
   }
 
   public remove(item){
     // Verify if item exists
-    let index = this.listItems.indexOf(item);
-    this.listItems.splice(index, 1);
+    return this.httpClient.delete(`${environment.firebase.databaseURL}/items/${item.key}.json`);
   }
 
-  public cross(item){
+  public edit(item){
     // verify if tem exists
-    let index = this.listItems.indexOf(item);
-    this.listItems[index].disabled = true;
+    let key = item.key;
+    delete item.key;
+    return this.httpClient.patch(`${environment.firebase.databaseURL}/items/${key}.json`, item);
   }
 
 }
