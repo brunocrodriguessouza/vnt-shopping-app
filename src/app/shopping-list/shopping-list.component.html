@@ -1,7 +1,9 @@
 <form>
   <div class="input-group mt3">
-    <input type="text" class="form-control" placeholder="Item name">
-    <button type="submit" class="btn btn-primary">Add</button>
+    <input type="text" class="form-control" name="myInput"
+           placeholder="Item name" [(ngModel)] = "itemToAdd" >
+    <button type="submit" class="btn btn-primary"
+    (click)="addObjectToList()">Add</button>
   </div>
 </form>
 <ul class="list-group">
