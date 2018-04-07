@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../environments/environment';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ShoppingListService {
 
   private listItems: Array<any>;
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
     this.listItems = [{
       name: 'Bread',
       disabled: false
@@ -21,12 +24,15 @@ export class ShoppingListService {
     },]
   }
 
-  public findAll(){
-    return this.listItems;
+  public findAll(): Observable<Object>{
+    return this.httpClient.get(`${environment.firebase.databaseURL}/items.json`);
   }
 
   public add(item){
-    this.listItems.unshift(item);
+    this.httpClient.post(`${environment.firebase.databaseURL}/items.json`, item).subscribe(
+      response => { console.log('Deu certo!')},
+      error => { console.log('Deu certo!')} 
+    );  
   }
 
   public remove(item){

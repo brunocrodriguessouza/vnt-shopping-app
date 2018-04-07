@@ -11,10 +11,10 @@ import { HeaderComponent } from './header/header.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingListItemComponent } from './shopping-list/shopping-list-item/shopping-list-item.component';
 
-
 import { ShoppingListService } from './shopping-list.service';
-import { AuthService} from './auth.service';
+import { AuthService } from './auth.service';
 
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +26,7 @@ import { AuthService} from './auth.service';
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     RouterModule.forRoot(APP_ROUTES)
   ],
   providers: [
